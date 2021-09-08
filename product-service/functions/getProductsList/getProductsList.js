@@ -52,6 +52,8 @@ getProductsList = async (event) => {
       return handleResponse(products);
     } catch (error) {
       console.log(error);
+      return handleResponse
+        ({ message: `Something went terribly wrong.${error}`}, 500);
     } finally {
       client.end();
     }

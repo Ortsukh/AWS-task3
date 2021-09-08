@@ -80,7 +80,7 @@ await client.query(
   } catch (error) {
       console.log(error);
     return handleResponse
-        ({ message: `Something went terribly wrong.${error}`}, 400);
+        ({ message: `Something went terribly wrong.${error}`}, 500);
       
       
     ;
