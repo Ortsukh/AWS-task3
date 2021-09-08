@@ -37,19 +37,18 @@ module.exports.handler = async event => {
 
   console.log(`[${new Date().toLocaleString()}]`);
   console.log('[REQUEST]: add a product');
-  console.log(`[Request body]: ${JSON.stringify(event.body)}`);
+  console.log(event.body);
+  
 
   const client = new Client(dbOptions);
-//   const validationErrors = validateProduct(event.body);
-//   if (validationErrors.length) {
-//     return formatJSONErrorResponse(
-//       StatusCodes.BAD_REQUEST,
-//       JSON.stringify(validationErrors)
-//     );
-//   }
 
-  const { title, description, price, count } = event.body;
-console.log(typeof(price) );
+
+  const { title, description, price, count } = JSON.parse(event.body)  ;
+  if (!title || price < 0 || count < 0) {
+    return handleResponse({
+      message: 'Bad request',
+    }, 400);
+  }
   try {
       console.log(12);
     await client.connect();
