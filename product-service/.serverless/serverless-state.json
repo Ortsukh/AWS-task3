@@ -10,6 +10,13 @@
       "stage": "dev",
       "region": "eu-west-1",
       "lambdaHashingVersion": "20201221",
+      "environment": {
+        "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
+        "PG_PORT": "5432",
+        "PG_DATABASE": "task4",
+        "PG_USERNAME": "postgres",
+        "PG_PASSWORD": "goodwin1"
+      },
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
@@ -96,6 +103,12 @@
               "LogGroupName": "/aws/lambda/product-service-dev-getProductsById"
             }
           },
+          "AddProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/product-service-dev-addProduct"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -180,13 +193,22 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1629738813995-2021-08-23T17:13:33.995Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1631132437237-2021-09-08T20:20:37.237Z/product-service.zip"
               },
               "Handler": "functions/getProductsList/getProductsList.handler",
               "Runtime": "nodejs14.x",
               "FunctionName": "product-service-dev-getProductsList",
               "MemorySize": 1024,
               "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
+                  "PG_PORT": "5432",
+                  "PG_DATABASE": "task4",
+                  "PG_USERNAME": "postgres",
+                  "PG_PASSWORD": "goodwin1"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -205,13 +227,22 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1629738813995-2021-08-23T17:13:33.995Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1631132437237-2021-09-08T20:20:37.237Z/product-service.zip"
               },
               "Handler": "functions/getProductsById/getProductsById.handler",
               "Runtime": "nodejs14.x",
               "FunctionName": "product-service-dev-getProductsById",
               "MemorySize": 1024,
               "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
+                  "PG_PORT": "5432",
+                  "PG_DATABASE": "task4",
+                  "PG_USERNAME": "postgres",
+                  "PG_PASSWORD": "goodwin1"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -223,24 +254,68 @@
               "GetProductsByIdLogGroup"
             ]
           },
-          "GetProductsListLambdaVersionDgF1YohbCInTScSIHzb5ZpjoNjiwTtZ0nXXcND7dw": {
+          "AddProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/product-service/dev/1631132437237-2021-09-08T20:20:37.237Z/product-service.zip"
+              },
+              "Handler": "functions/addProduct/addProduct.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "product-service-dev-addProduct",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
+                  "PG_PORT": "5432",
+                  "PG_DATABASE": "task4",
+                  "PG_USERNAME": "postgres",
+                  "PG_PASSWORD": "goodwin1"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "AddProductLogGroup"
+            ]
+          },
+          "GetProductsListLambdaVersionzCluKmgVPEheErGMeSwMTYSxqxia59naVZnVpPb0VDE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductsListLambdaFunction"
               },
-              "CodeSha256": "00AdaNs/rFW87IC7isQrqb28xovahZxkEVJJlaFfI70="
+              "CodeSha256": "U+aEzA54vKkt4Wbdd1aSqNwkGx7WL5m96vvSa+IPLBU="
             }
           },
-          "GetProductsByIdLambdaVersion4IUJgzCTwrRMSQa9kklBvKzye4WwH0SBZ7izxHtDc": {
+          "GetProductsByIdLambdaVersion4lHJh87KvpPGnRv6HC3bLW7EQlCxkLJ70I7f5DoIvM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductsByIdLambdaFunction"
               },
-              "CodeSha256": "00AdaNs/rFW87IC7isQrqb28xovahZxkEVJJlaFfI70="
+              "CodeSha256": "U+aEzA54vKkt4Wbdd1aSqNwkGx7WL5m96vvSa+IPLBU="
+            }
+          },
+          "AddProductLambdaVersionZF0EO08Hae4F6C7AZLuvein8v1DtWdxc616lZB2A": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "AddProductLambdaFunction"
+              },
+              "CodeSha256": "U+aEzA54vKkt4Wbdd1aSqNwkGx7WL5m96vvSa+IPLBU="
             }
           },
           "ApiGatewayRestApi": {
@@ -311,7 +386,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
                     },
                     "ResponseTemplates": {
                       "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -464,7 +539,53 @@
               "GetProductsByIdLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1629738807450": {
+          "ApiGatewayMethodProductsPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceProducts"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AddProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "AddProductLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1631132430788": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -476,7 +597,8 @@
               "ApiGatewayMethodProductsOptions",
               "ApiGatewayMethodProductsProductidVarOptions",
               "ApiGatewayMethodProductsGet",
-              "ApiGatewayMethodProductsProductidVarGet"
+              "ApiGatewayMethodProductsProductidVarGet",
+              "ApiGatewayMethodProductsPost"
             ]
           },
           "GetProductsListLambdaPermissionApiGateway": {
@@ -552,6 +674,43 @@
                 ]
               }
             }
+          },
+          "AddProductLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "AddProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
           }
         },
         "Outputs": {
@@ -566,7 +725,7 @@
           "GetProductsListLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductsListLambdaVersionDgF1YohbCInTScSIHzb5ZpjoNjiwTtZ0nXXcND7dw"
+              "Ref": "GetProductsListLambdaVersionzCluKmgVPEheErGMeSwMTYSxqxia59naVZnVpPb0VDE"
             },
             "Export": {
               "Name": "sls-product-service-dev-GetProductsListLambdaFunctionQualifiedArn"
@@ -575,10 +734,19 @@
           "GetProductsByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductsByIdLambdaVersion4IUJgzCTwrRMSQa9kklBvKzye4WwH0SBZ7izxHtDc"
+              "Ref": "GetProductsByIdLambdaVersion4lHJh87KvpPGnRv6HC3bLW7EQlCxkLJ70I7f5DoIvM"
             },
             "Export": {
               "Name": "sls-product-service-dev-GetProductsByIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "AddProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "AddProductLambdaVersionZF0EO08Hae4F6C7AZLuvein8v1DtWdxc616lZB2A"
+            },
+            "Export": {
+              "Name": "sls-product-service-dev-AddProductLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -731,7 +899,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductsListLambdaVersionDgF1YohbCInTScSIHzb5ZpjoNjiwTtZ0nXXcND7dw"
+        "versionLogicalId": "GetProductsListLambdaVersionzCluKmgVPEheErGMeSwMTYSxqxia59naVZnVpPb0VDE"
       },
       "getProductsById": {
         "handler": "functions/getProductsById/getProductsById.handler",
@@ -769,7 +937,45 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductsByIdLambdaVersion4IUJgzCTwrRMSQa9kklBvKzye4WwH0SBZ7izxHtDc"
+        "versionLogicalId": "GetProductsByIdLambdaVersion4lHJh87KvpPGnRv6HC3bLW7EQlCxkLJ70I7f5DoIvM"
+      },
+      "addProduct": {
+        "handler": "functions/addProduct/addProduct.handler",
+        "events": [
+          {
+            "http": {
+              "path": "products",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "product-service-dev-addProduct",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "AddProductLambdaVersionZF0EO08Hae4F6C7AZLuvein8v1DtWdxc616lZB2A"
       }
     },
     "configValidationMode": "warn",
@@ -791,7 +997,7 @@
     "artifact": "C:\\myWork\\nodeAWS\\task3\\product-service\\.serverless\\product-service.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/product-service/dev/1629738813995-2021-08-23T17:13:33.995Z",
+    "artifactDirectoryName": "serverless/product-service/dev/1631132437237-2021-09-08T20:20:37.237Z",
     "artifact": "product-service.zip"
   }
 }

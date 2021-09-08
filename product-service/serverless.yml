@@ -27,6 +27,13 @@ provider:
   region: eu-west-1
   lambdaHashingVersion: 20201221
 
+  environment:
+    PG_HOST: task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com
+    PG_PORT: 5432
+    PG_DATABASE: task4
+    PG_USERNAME: postgres
+    PG_PASSWORD: goodwin1
+
 # plugins:
 #   - serverless-webpack
 # you can overwrite defaults here
@@ -76,7 +83,16 @@ functions:
       - http:
           path: products/{productId}
           method: get
-          cors: true        
+          cors: true     
+
+  addProduct:
+    handler: functions/addProduct/addProduct.handler
+    events:
+      - http:
+          path: products
+          method: post
+          cors: true     
+          
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
