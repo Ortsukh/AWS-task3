@@ -33,6 +33,7 @@ handleResponse = (products = {}, status = 200) => ({
     body: JSON.stringify(products),
   });
 getProductsList = async (event) => {
+  console.log(event);
   const client = new Client(dbOptions);
     try {
       await client.connect();

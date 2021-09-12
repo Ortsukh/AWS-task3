@@ -37,6 +37,11 @@ module.exports.handler = async event => {
   const client = new Client(dbOptions);
   const { productId } = event.pathParameters || {};
   console.log(productId);
+
+  if (!productId) {
+    return handleResponse({ message: "There is no product with such ip" }, 400);
+  }
+
     try {
       await client.connect();
       const queryResult = await client.query(`
@@ -52,7 +57,7 @@ module.exports.handler = async event => {
     where products.id = '${productId}'
     `);
       if (!queryResult.rows.length) {
-        return handleResponse({ message: "There is no product with such ip" }, 400);
+        return handleResponse({ message: "Product not found." }, 400);
       }
       return handleResponse(queryResult.rows[0]);
     } catch (error) {
