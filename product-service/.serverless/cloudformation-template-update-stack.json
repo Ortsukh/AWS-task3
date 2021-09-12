@@ -173,7 +173,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/product-service/dev/1631135754745-2021-09-08T21:15:54.745Z/product-service.zip"
+          "S3Key": "serverless/product-service/dev/1631423918218-2021-09-12T05:18:38.218Z/product-service.zip"
         },
         "Handler": "functions/getProductsList/getProductsList.handler",
         "Runtime": "nodejs14.x",
@@ -182,11 +182,11 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
-            "PG_PORT": "5432",
-            "PG_DATABASE": "task4",
-            "PG_USERNAME": "postgres",
-            "PG_PASSWORD": "goodwin1"
+            "PG_HOST": null,
+            "PG_PORT": null,
+            "PG_DATABASE": null,
+            "PG_USERNAME": null,
+            "PG_PASSWORD": null
           }
         },
         "Role": {
@@ -207,7 +207,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/product-service/dev/1631135754745-2021-09-08T21:15:54.745Z/product-service.zip"
+          "S3Key": "serverless/product-service/dev/1631423918218-2021-09-12T05:18:38.218Z/product-service.zip"
         },
         "Handler": "functions/getProductsById/getProductsById.handler",
         "Runtime": "nodejs14.x",
@@ -216,11 +216,11 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
-            "PG_PORT": "5432",
-            "PG_DATABASE": "task4",
-            "PG_USERNAME": "postgres",
-            "PG_PASSWORD": "goodwin1"
+            "PG_HOST": null,
+            "PG_PORT": null,
+            "PG_DATABASE": null,
+            "PG_USERNAME": null,
+            "PG_PASSWORD": null
           }
         },
         "Role": {
@@ -241,7 +241,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/product-service/dev/1631135754745-2021-09-08T21:15:54.745Z/product-service.zip"
+          "S3Key": "serverless/product-service/dev/1631423918218-2021-09-12T05:18:38.218Z/product-service.zip"
         },
         "Handler": "functions/addProduct/addProduct.handler",
         "Runtime": "nodejs14.x",
@@ -250,11 +250,11 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "PG_HOST": "task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com",
-            "PG_PORT": "5432",
-            "PG_DATABASE": "task4",
-            "PG_USERNAME": "postgres",
-            "PG_PASSWORD": "goodwin1"
+            "PG_HOST": null,
+            "PG_PORT": null,
+            "PG_DATABASE": null,
+            "PG_USERNAME": null,
+            "PG_PASSWORD": null
           }
         },
         "Role": {
@@ -268,34 +268,34 @@
         "AddProductLogGroup"
       ]
     },
-    "GetProductsListLambdaVersionhdVWfr4jspGRlvO7dmiCjPSDHsfxMSRx3uOVEByvE": {
+    "GetProductsListLambdaVersionOmFzPbxJp9GugKVI0lA6DhZeA0pgdU23XKwu2Xvwog": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetProductsListLambdaFunction"
         },
-        "CodeSha256": "NuRy0T68vIhNv27AUkRjchBEAWuxJ9Ca1Iq+LSIYVpA="
+        "CodeSha256": "CsPxziMv3cNCoYR4cT+wSHvQ33ZiJbxkDz1zuZUQzfw="
       }
     },
-    "GetProductsByIdLambdaVersiontq1fRJAMpaA6zD3BRUbG21iQauaPdc23wu9mwDIuFw": {
+    "GetProductsByIdLambdaVersionJK99pIVcYY4uWjlIhb0CHpziooF5IZ23HBQQtqTVs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetProductsByIdLambdaFunction"
         },
-        "CodeSha256": "NuRy0T68vIhNv27AUkRjchBEAWuxJ9Ca1Iq+LSIYVpA="
+        "CodeSha256": "CsPxziMv3cNCoYR4cT+wSHvQ33ZiJbxkDz1zuZUQzfw="
       }
     },
-    "AddProductLambdaVersionS43zr95qStQAhSs19lGOrcjfxe5NtbT8Pdfk4K8M": {
+    "AddProductLambdaVersionmjXT2yLYdEWDoP8OgfRw9eOqE75aueQUT8s5xri5E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AddProductLambdaFunction"
         },
-        "CodeSha256": "NuRy0T68vIhNv27AUkRjchBEAWuxJ9Ca1Iq+LSIYVpA="
+        "CodeSha256": "CsPxziMv3cNCoYR4cT+wSHvQ33ZiJbxkDz1zuZUQzfw="
       }
     },
     "ApiGatewayRestApi": {
@@ -565,7 +565,7 @@
         "AddProductLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1631135748017": {
+    "ApiGatewayDeployment1631423907843": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -705,7 +705,7 @@
     "GetProductsListLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetProductsListLambdaVersionhdVWfr4jspGRlvO7dmiCjPSDHsfxMSRx3uOVEByvE"
+        "Ref": "GetProductsListLambdaVersionOmFzPbxJp9GugKVI0lA6DhZeA0pgdU23XKwu2Xvwog"
       },
       "Export": {
         "Name": "sls-product-service-dev-GetProductsListLambdaFunctionQualifiedArn"
@@ -714,7 +714,7 @@
     "GetProductsByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetProductsByIdLambdaVersiontq1fRJAMpaA6zD3BRUbG21iQauaPdc23wu9mwDIuFw"
+        "Ref": "GetProductsByIdLambdaVersionJK99pIVcYY4uWjlIhb0CHpziooF5IZ23HBQQtqTVs"
       },
       "Export": {
         "Name": "sls-product-service-dev-GetProductsByIdLambdaFunctionQualifiedArn"
@@ -723,7 +723,7 @@
     "AddProductLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AddProductLambdaVersionS43zr95qStQAhSs19lGOrcjfxe5NtbT8Pdfk4K8M"
+        "Ref": "AddProductLambdaVersionmjXT2yLYdEWDoP8OgfRw9eOqE75aueQUT8s5xri5E"
       },
       "Export": {
         "Name": "sls-product-service-dev-AddProductLambdaFunctionQualifiedArn"

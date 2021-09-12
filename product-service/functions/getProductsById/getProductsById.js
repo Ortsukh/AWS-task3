@@ -34,7 +34,6 @@ handleResponse = (products = {}, status = 200) => ({
 module.exports.handler = async event => {
   
   console.log(event);
-  console.log(dbOptions);
   const client = new Client(dbOptions);
   const { productId } = event.pathParameters || {};
   console.log(productId);

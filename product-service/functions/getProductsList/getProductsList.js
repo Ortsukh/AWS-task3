@@ -33,8 +33,6 @@ handleResponse = (products = {}, status = 200) => ({
     body: JSON.stringify(products),
   });
 getProductsList = async (event) => {
-  console.log(12);
-  console.log(dbOptions);
   const client = new Client(dbOptions);
     try {
       await client.connect();
@@ -51,7 +49,6 @@ getProductsList = async (event) => {
       `);
       return handleResponse(products);
     } catch (error) {
-      console.log(error);
       return handleResponse
         ({ message: `Something went terribly wrong.${error}`}, 500);
     } finally {

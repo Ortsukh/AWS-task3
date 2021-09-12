@@ -50,7 +50,6 @@ module.exports.handler = async event => {
     }, 400);
   }
   try {
-      console.log(12);
     await client.connect();
     await client.query('BEGIN');
     await client.query(
@@ -65,15 +64,11 @@ module.exports.handler = async event => {
     where title = '${title}'
     `);
     const id = addedProduct[0].id;
-console.log(id);
-console.log(client.query)
 await client.query(
     `insert into stocks(product_id, count) values ($1, ${count})`,
     [id]
   );
-    console.log(2);
     await client.query('COMMIT');
-    console.log(3);
     return handleResponse({
       message: 'Product added.',
     });
@@ -91,31 +86,3 @@ await client.query(
 
 
   
-//   console.log(event);
-//   console.log(dbOptions);
-//   const client = new Client(dbOptions);
-//   const { productId } = event.pathParameters || {};
-//   console.log(productId);
-//     try {
-//       await client.connect();
-//       const queryResult = await client.query(`
-//     select
-//       products.id as id,
-//       stocks.count as count,
-//       products.title as title,
-//       products.description as description,
-//       products.price as price
-//     from products
-//     join stocks
-//     on products.id = stocks.product_id
-//     where products.id = '${productId}'
-//     `);
-//       if (!queryResult.rows.length) {
-//         return handleResponse({ message: "There is no product with such ip" }, 400);
-//       }
-//       return handleResponse(queryResult.rows[0]);
-//     } catch (error) {
-//       console.log(error);
-//     } finally {
-//       client.end();
-//     }}
