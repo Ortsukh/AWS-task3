@@ -1,0 +1,47 @@
+
+
+service: import-service
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-west-1
+  lambdaHashingVersion: 20201221
+
+package:
+  individually: true
+
+iamRoleStatements:
+  - Effect: Allow
+    Action: s3:ListBucket
+    Resource:
+      - arn:aws:s3:::node-aws-course
+  - Effect: Allow
+    Action:
+      - s3:*
+    Resource:
+      - arn:aws:s3:::node-aws-course/*
+
+functions:
+  importProductsFile:
+    handler: functions/importProductsFile.handler
+    events:
+      - http:
+          path: import
+          method: GET
+          parameters:
+            queryStrings:
+              name: true
+
+  importFileParser:
+    handler: functions/importFileParser.handler
+    events:
+      - s3:
+          bucket: node-aws-course
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true
