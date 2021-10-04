@@ -99,15 +99,4 @@ resources:
           Ref: SNSTopic
         FilterPolicy:
           status: 
-            - "In process"
-
-    # SNSFinishParsingSubscription:
-    #   Type: AWS::SNS::Subscription
-    #   Properties:
-    #     Endpoint: gex_92@mail.ru
-    #     Protocol: email
-    #     TopicArn:
-    #       Ref: SNSTopic
-    #     FilterPolicy:
-    #       status: 
-    #         - "Done"          
+            - "In process"    
