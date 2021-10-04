@@ -1,6 +1,7 @@
 
 const csv = require('csv-parser');
 const { S3 } = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 handleResponse = (products = {}, status = 200) => ({
   headers: {
@@ -11,6 +12,22 @@ handleResponse = (products = {}, status = 200) => ({
   statusCode: status,
   body: JSON.stringify(products),
 }); 
+
+const sendMessageToSQS = async (sqs, messageBody) => {
+  await sqs.sendMessage(
+    {
+      QueueUrl: process.env.SQS_URL,
+      MessageBody: messageBody,
+    },
+    (error, data) => {
+      if (error) {
+        console.log('SQS error', error);
+        throw Error(error);
+      }
+      console.log(`Send message: ${data}`);
+    },
+  );
+};
 
 module.exports.handler = async event => { 
   console.log(event);
@@ -26,12 +43,14 @@ module.exports.handler = async event => {
     };
 
     const s3 = new S3({ region: 'eu-west-1' });
+    const sqs = new AWS.SQS({ region: 'eu-west-1' }); 
     const s3Stream = s3.getObject(params).createReadStream();
 
     const result = await new Promise((resolve, reject) => {
       s3Stream.pipe(csv())
         .on('data', data => {
           console.log('data', data);
+          sendMessageToSQS(sqs, JSON.stringify(data));
         })
         .on('error', error => {
           reject(error);
