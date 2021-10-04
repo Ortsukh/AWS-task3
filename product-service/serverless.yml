@@ -28,11 +28,11 @@ provider:
   lambdaHashingVersion: 20201221
 
   environment:
-    PG_HOST: task-4.cvwsubzpwjwk.eu-west-1.rds.amazonaws.com
-    PG_PORT: 5432
-    PG_DATABASE: task4
-    PG_USERNAME: postgres
-    PG_PASSWORD: goodwin1
+    PG_HOST: 
+    PG_PORT: 
+    PG_DATABASE: 
+    PG_USERNAME: 
+    PG_PASSWORD: 
 
 # plugins:
 #   - serverless-webpack
