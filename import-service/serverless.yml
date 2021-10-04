@@ -99,4 +99,15 @@ resources:
           Ref: SNSTopic
         FilterPolicy:
           status: 
-            - "In process"    
+            - "In process"
+
+    SNSFinishSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: e.ortsukh@gmail.com
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
+        FilterPolicy:
+          status: 
+            - "Done"          

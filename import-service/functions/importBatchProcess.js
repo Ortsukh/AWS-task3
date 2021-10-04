@@ -63,12 +63,12 @@ module.exports.handler = async event => {
 
     const params = {
       Subject: 'End of file parsing',
-      Message: isFileParsed ? 'File has been parsed' : 'Parsing is in process',
+      Message: isFileParsed ? 'Parsing is in process' : 'File has been parsed',
       TopicArn: process.env.SNS_ARN,
       MessageAttributes: {
         status: {
           DataType: 'String',
-          StringValue: isFileParsed ? 'Done' : 'In process',
+          StringValue: isFileParsed ? 'In process' : 'Done',
         },
       },
     };
