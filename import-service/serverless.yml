@@ -11,10 +11,18 @@ provider:
   region: eu-west-1
   lambdaHashingVersion: 20201221
 
-package:
-  individually: true
+  environment:
+    PG_HOST: 
+    PG_PORT: 
+    PG_DATABASE: 
+    PG_USERNAME: 
+    PG_PASSWORD: 
+    SQS_URL:
+      Ref: SQSQueue
+    SNS_ARN:
+      Ref: SNSTopic 
 
-iamRoleStatements:
+  iamRoleStatements:
   - Effect: Allow
     Action: s3:ListBucket
     Resource:
@@ -24,6 +32,20 @@ iamRoleStatements:
       - s3:*
     Resource:
       - arn:aws:s3:::node-aws-course/*
+  - Effect: Allow
+    Action: sqs:*
+    Resource:
+      Fn::GetAtt:
+        - SQSQueue
+        - Arn
+  - Effect: Allow
+    Action: sns:*
+    Resource:
+      Ref: SNSTopic
+package:
+  individually: true
+
+
 
 functions:
   importProductsFile:
@@ -45,3 +67,47 @@ functions:
           rules:
             - prefix: uploaded/
           existing: true
+
+  importBatchProcess:
+    handler: functions/importBatchProcess.handler
+    events:
+      - sqs:
+          batchSize: 5
+          arn:
+            Fn::GetAtt:
+              - SQSQueue
+              - Arn        
+
+resources:
+  Resources:
+    SQSQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: import-service-queue
+    
+    SNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: import-service-topic
+
+    SNSSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: gex_92@mail.ru
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
+        FilterPolicy:
+          status: 
+            - "In process"
+
+    SNSFinishSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: e.ortsukh@gmail.com
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
+        FilterPolicy:
+          status: 
+            - "Done"          
