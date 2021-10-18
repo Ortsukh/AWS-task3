@@ -26,13 +26,14 @@ module.exports.handler = async (event, ctx, callback) => {
         callback('Unauthorized');
       }
   
-      let credentialsChunk = authorizationToken.split(' ')[1];
-      console.log('token', credentialsChunk);
+      let encodeToken = authorizationToken.split(' ')[1];
+      console.log('token', encodeToken);
   
-      const credentialsBuffer = Buffer.from(credentialsChunk, 'base64');
-      const plainCredentials = credentialsBuffer.toString('utf-8').split(':');
-      const  password = plainCredentials[0].trim();
-      const storedUserPassword = process.env.Ortsukh;
+      const bufferValue = Buffer.from(encodeToken, 'base64');
+      const passToken = bufferValue.toString('utf-8').split(':');
+      console.log(passToken);
+      const  password = passToken[1].trim();
+      const storedUserPassword = process.env.token;
       const isPasswordCorrect = storedUserPassword && storedUserPassword === password;
       const effect = isPasswordCorrect ? 'Allow' : 'Deny';
       const policy = generatePolicy('user', methodArn, effect);

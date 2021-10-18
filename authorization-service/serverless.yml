@@ -7,7 +7,7 @@ provider:
   stage: dev
   region: eu-west-1
   environment:
-    Ortsukh: 
+   token: 
 
 package:
   individually: true
