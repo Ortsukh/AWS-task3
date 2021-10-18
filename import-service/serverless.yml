@@ -54,6 +54,13 @@ functions:
       - http:
           path: import
           method: GET
+          authorizer:
+            name: basicAuthorizer
+            arn: arn:aws:lambda:eu-west-1:009866512610:function:authorization-service-dev-basicAuthorizer
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+            type: token
+          cors: true
           parameters:
             queryStrings:
               name: true
@@ -80,6 +87,26 @@ functions:
 
 resources:
   Resources:
+    GatewayResponseDefault4XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+          
+    GatewayResponseDefault5XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+
     SQSQueue:
       Type: AWS::SQS::Queue
       Properties:
@@ -110,4 +137,5 @@ resources:
           Ref: SNSTopic
         FilterPolicy:
           status: 
-            - "Done"          
+            - "Done"     
+                 

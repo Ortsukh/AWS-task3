@@ -1,0 +1,18 @@
+{
+  "name": "authorization-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-webpack": "^5.5.1"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "sls": "^0.1.0"
+  }
+}
