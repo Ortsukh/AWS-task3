@@ -1,0 +1,17 @@
+service: authorization-service
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-west-1
+  environment:
+   token: 
+
+package:
+  individually: true
+      
+functions:
+  basicAuthorizer:
+    handler: functions/authorization.handler
