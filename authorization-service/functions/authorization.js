@@ -28,7 +28,7 @@ module.exports.handler = async (event, ctx, callback) => {
   
       let encodeToken = authorizationToken.split(' ')[1];
       console.log('token', encodeToken);
-  
+  console.log(1);
       const bufferValue = Buffer.from(encodeToken, 'base64');
       const passToken = bufferValue.toString('utf-8').split(':');
       console.log(passToken);
